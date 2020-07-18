@@ -1,0 +1,32 @@
+<h4>Order Recipe</h4>
+<form [formGroup]="recipeForm" (ngSubmit)="orderRecipe()">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="recipeName" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" formControlName="description" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+        <div formArrayName="ingredients">
+            <label>Ingredients</label>
+            <div *ngFor="let ingredient of ingredients.controls; index as iidx">
+                <input type="text" [formControlName]="iidx" class="form-control" readonly>
+                <input type="button" value="X" class="btn btn-danger" (click)="removeItemAt(iidx)">
+            </div>
+        </div>
+        <br/>
+        <div formArrayName="quantities">
+            <label>Quantities</label>
+            <div *ngFor="let quantity of quantities.controls; index as qidx">
+                <input type="text" [formControlName]="qidx" class="form-control">
+                <input type="button" value="X" class="btn btn-danger" (click)="removeItemAt(qidx)">
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <button type="submit" class="btn btn-primary">Order</button>
+    <div class="spinner-border text-primary" role="status" *ngIf="spinnerEnabled"></div>
+</form>

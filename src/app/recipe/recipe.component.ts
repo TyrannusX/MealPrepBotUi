@@ -14,7 +14,7 @@ export class RecipeComponent implements OnInit {
     ingredients: new FormArray([
     ]),
     quantities: new FormArray([
-      
+
     ])
   });
 
@@ -70,7 +70,12 @@ export class RecipeComponent implements OnInit {
 
     const ingredientControls = this.recipeForm.get('ingredients') as FormArray;
     ingredientControls.controls.forEach(x =>{
-      recipeObject.ingredients.push({upc: x.value});
+      const loopIngredientsList = this.ingredientsList as any[];
+      loopIngredientsList.forEach(y => {
+        if(y.upc === x.value){
+          recipeObject.ingredients.push({upc: x.value, description: y.description});
+        }
+      });
     });
 
     const quantities = this.recipeForm.get('quantities') as FormArray;

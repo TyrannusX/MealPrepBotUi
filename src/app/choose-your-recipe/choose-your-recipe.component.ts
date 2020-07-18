@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -11,7 +11,7 @@ export class ChooseYourRecipeComponent implements OnInit {
   krogerUserCode: string;
   recipes: any;
 
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
+  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private router: Router) {
     this.route.queryParams.subscribe(params =>{
       this.krogerUserCode = params['code'];
     });
@@ -27,9 +27,7 @@ export class ChooseYourRecipeComponent implements OnInit {
     });
   }
 
-  orderRecipe(recipesId: any){
-    this.httpClient.post(`http://localhost:5000/OrderStuffPlease/${this.krogerUserCode}/${recipesId}`, null).subscribe(response => {
-      console.log(response);
-    })
+  orderRecipe(recipeIdInput: any){
+    this.router.navigate(['/Order'], {queryParams: {krogerUserCode: this.krogerUserCode, recipeId: recipeIdInput}})
   }
 }

@@ -10,6 +10,7 @@ import { KrogerRedirectComponent } from './kroger-redirect/kroger-redirect.compo
 import { ChooseYourRecipeComponent } from './choose-your-recipe/choose-your-recipe.component';
 import { SearchProductsComponent } from './search-products/search-products.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RecipeComponent } from './recipe/recipe.component';
     KrogerRedirectComponent,
     ChooseYourRecipeComponent,
     SearchProductsComponent,
-    RecipeComponent
+    RecipeComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
