@@ -21,6 +21,8 @@ export class RecipeComponent implements OnInit {
   ingredientsList: any;
 
   spinnerEnabled: boolean = false;
+  showSuccess: boolean = false;
+  successMessage: string;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -59,7 +61,7 @@ export class RecipeComponent implements OnInit {
   }
 
   submitRecipe(){
-    console.log(this.recipeForm);
+    this.showSuccess = false;
     this.spinnerEnabled = true;
     let recipeObject: any = {
       recipeName: this.recipeForm.get('recipeName').value,
@@ -85,6 +87,8 @@ export class RecipeComponent implements OnInit {
 
     this.httpClient.post('http://localhost:5000/AddRecipeToDb', recipeObject).subscribe(response => {
       this.spinnerEnabled = false;
+      this.showSuccess = true;
+      this.successMessage = 'Added Recipe Successfully';
     });
   }
 }

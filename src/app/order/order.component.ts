@@ -23,7 +23,7 @@ export class OrderComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
     this.route.queryParams.subscribe(params =>{
-      this.krogerUserCode = params['code'];
+      this.krogerUserCode = params['krogerUserCode'];
       this.recipeId = params['recipeId'];
 
       this.getRecipeInformation();
@@ -71,6 +71,31 @@ export class OrderComponent implements OnInit {
   }
 
   orderRecipe(){
+    this.spinnerEnabled = true;
+    let recipeToOrder = {
+      krogerUserCode: this.krogerUserCode,
+      ingredients: [],
+      quantities: []
+    };
 
+    const ingredients = this.recipeForm.get('ingredients') as FormArray;
+    const loopIngredients = this.recipe.ingredients as any[];
+    ingredients.controls.forEach(x => {
+      loopIngredients.forEach(y =>{
+        if(x.value == y.description){
+          recipeToOrder.ingredients.push({upc: y.upc});
+        }
+      });
+    });
+
+    const quantities = this.recipeForm.get('quantities') as FormArray;
+    quantities.controls.forEach(x => {
+      recipeToOrder.quantities.push({quantity: x.value});
+    });
+
+    console.log(recipeToOrder);
+    this.httpClient.post('http://localhost:5000/OrderStuffPlease', recipeToOrder).subscribe(response => {
+      this.spinnerEnabled = false;
+    });
   }
 }

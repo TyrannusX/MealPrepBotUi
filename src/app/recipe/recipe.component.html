@@ -1,4 +1,7 @@
 <h4>Add Recipe</h4>
+<div class="alert alert-success" role="alert" *ngIf="showSuccess">
+    {{successMessage}}
+</div>
 <form [formGroup]="recipeForm" (ngSubmit)="submitRecipe()">
     <div class="form-group">
         <label>Name</label>
