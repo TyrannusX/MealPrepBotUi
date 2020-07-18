@@ -1,0 +1,39 @@
+<input class="form-control" type="text" [(ngModel)]="searchCriteria"/>
+<button class="btn btn-primary" type="submit" (click)="search()">Submit</button>
+<div class="spinner-border text-primary" role="status" *ngIf="spinnerEnabled"></div>
+<div class="alert alert-success" role="alert" *ngIf="showSuccess">
+    {{successMessage}}
+</div>
+<div *ngIf="isSubmitted">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>UPC</th>
+                <th>Product ID</th>
+                <th>Description</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items">
+                <td>{{item.upc}}</td>
+                <td>{{item.productId}}</td>
+                <td>{{item.description}}</td>
+                <div *ngFor="let image of item.images">
+                    <div *ngIf="filterImage(image)">
+                        <div *ngFor="let size of image.sizes">
+                            <div *ngIf="filterImageSize(size)">
+                                <td>
+                                    <img src="{{size.url}}"/>
+                                </td>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <td>
+                    <input type="button" class="btn btn-primary" value="Add" (click)="addProductIdToDb(item.description, item.upc)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

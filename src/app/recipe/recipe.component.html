@@ -1,0 +1,37 @@
+<h4>Add Recipe</h4>
+<form [formGroup]="recipeForm" (ngSubmit)="submitRecipe()">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="recipeName" class="form-control">
+        <small class="form-text text-muted">Descriptive name for your recipe</small>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" formControlName="description" class="form-control">
+        <small class="form-text text-muted">Description for your recipe</small>
+    </div>
+    <div class="form-group">
+        <div formArrayName="ingredients">
+            <label>Ingredients</label>
+            <div *ngFor="let ingredient of ingredients.controls; index as iidx">
+                <select [formControlName]="iidx" class="form-control">
+                    <option *ngFor="let myIngredient of ingredientsList" [ngValue]="myIngredient.upc">{{myIngredient.description}}</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+        <div formArrayName="quantities">
+            <label>Quantities</label>
+            <div *ngFor="let quantity of quantities.controls; index as qidx">
+                <input type="text" [formControlName]="qidx" class="form-control">
+            </div>
+            <small class="form-text text-muted">Ingredients and quantities</small>
+        </div>
+    </div>
+    <input type="button" value="Add Ingredient" class="btn btn-secondary" (click)="addIngredientInput()">
+    <input type="button" value="Remove Ingredient" class="btn btn-secondary" (click)="removeIngredient()">
+    <br/>
+    <br/>
+    <button type="submit" class="btn btn-primary">Add</button>
+    <div class="spinner-border text-primary" role="status" *ngIf="spinnerEnabled"></div>
+</form>
