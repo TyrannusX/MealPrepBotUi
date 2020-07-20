@@ -1,3 +1,10 @@
+<input type="button" value="Add Ingredients to Cart" (click)="submitSavedIngredients()" class="btn btn-primary"/>
+<div class="spinner-border text-primary" role="status" *ngIf="spinnerEnabled"></div>
+<div class="alert alert-success" role="alert" *ngIf="showSuccess">
+  {{successMessage}}
+</div>
+<br/>
+<br/>
 <div class="row">
     <div class="col-sm-3" *ngFor="let recipe of recipes">
         <div class="card">

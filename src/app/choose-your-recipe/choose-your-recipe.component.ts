@@ -10,6 +10,9 @@ import { HttpClient } from '@angular/common/http';
 export class ChooseYourRecipeComponent implements OnInit {
   krogerUserCode: string;
   recipes: any;
+  spinnerEnabled: boolean = false;
+  showSuccess: boolean = false;
+  successMessage: string;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private router: Router) {
     this.route.queryParams.subscribe(params =>{
@@ -29,5 +32,15 @@ export class ChooseYourRecipeComponent implements OnInit {
 
   orderRecipe(recipeIdInput: any){
     this.router.navigate(['/Order'], {queryParams: {krogerUserCode: this.krogerUserCode, recipeId: recipeIdInput}})
+  }
+
+  submitSavedIngredients(){
+    this.spinnerEnabled = true;
+    const requestObject = {krogerUserCode: this.krogerUserCode};
+
+    this.httpClient.post('http://localhost:5000/SubmitSavedIngredients', requestObject).subscribe((response: any) => {
+      this.spinnerEnabled = false;
+      this.successMessage = 'Submitted existing ingredients to cart';
+    });
   }
 }
