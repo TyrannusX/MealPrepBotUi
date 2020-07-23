@@ -35,12 +35,25 @@ export class ChooseYourRecipeComponent implements OnInit {
   }
 
   submitSavedIngredients(){
+    this.showSuccess = false;
     this.spinnerEnabled = true;
     const requestObject = {krogerUserCode: this.krogerUserCode};
 
     this.httpClient.post('http://localhost:5000/SubmitSavedIngredients', requestObject).subscribe((response: any) => {
       this.spinnerEnabled = false;
       this.successMessage = 'Submitted existing ingredients to cart';
+      this.showSuccess = true;
+    });
+  }
+
+  deleteSavedIngredients(){
+    this.showSuccess = false;
+    this.spinnerEnabled = true;
+
+    this.httpClient.delete('http://localhost:5000/DeleteSavedIngredients').subscribe((response: any) => {
+      this.spinnerEnabled = false;
+      this.successMessage = 'Deleted ingredients cache';
+      this.showSuccess = true;
     });
   }
 }

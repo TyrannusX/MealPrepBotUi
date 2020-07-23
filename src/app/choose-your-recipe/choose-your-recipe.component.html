@@ -1,4 +1,5 @@
-<input type="button" value="Add Ingredients to Cart" (click)="submitSavedIngredients()" class="btn btn-primary"/>
+<input type="button" value="Add Ingredients to Cart" (click)="submitSavedIngredients()" class="btn btn-primary" style="margin-right: 5px;"/>
+<input type="button" value="Remove Ingredients Cache" (click)="deleteSavedIngredients()" class="btn btn-primary"/>
 <div class="spinner-border text-primary" role="status" *ngIf="spinnerEnabled"></div>
 <div class="alert alert-success" role="alert" *ngIf="showSuccess">
   {{successMessage}}
