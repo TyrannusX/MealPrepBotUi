@@ -34,8 +34,9 @@ export class OrderComponent implements OnInit {
     return this.recipeForm.get('ingredients') as FormArray;
   }
 
-  get quantities(): FormArray {
-    return this.recipeForm.get('quantities') as FormArray;
+  quantities(ingredientIndex): FormControl {
+    var x = this.recipeForm.get('quantities') as FormArray;
+    return x.at(ingredientIndex) as FormControl;
   }
 
   ngOnInit(): void {

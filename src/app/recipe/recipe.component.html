@@ -15,23 +15,28 @@
     </div>
     <div class="form-group">
         <div formArrayName="ingredients">
-            <label>Ingredients</label>
+            <div class="row">
+                <div class="col-sm-6"><label>Ingredients</label></div>
+                <div class="col-sm-6"><label>Quantities</label></div>
+            </div>
+            <small class="form-text text-muted">List of ingredients and quantities</small>
             <div *ngFor="let ingredient of ingredients.controls; index as iidx">
-                <select [formControlName]="iidx" class="form-control">
-                    <option *ngFor="let myIngredient of ingredientsList" [ngValue]="myIngredient.upc">{{myIngredient.description}}</option>
-                </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <select [formControlName]="iidx" class="form-control">
+                            <option *ngFor="let myIngredient of ingredientsList" [ngValue]="myIngredient.upc">{{myIngredient.description}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" [formControl]="quantities(iidx)" class="form-control">
+                    </div>
+                </div>
+                <br/>
             </div>
         </div>
         <br/>
-        <div formArrayName="quantities">
-            <label>Quantities</label>
-            <div *ngFor="let quantity of quantities.controls; index as qidx">
-                <input type="text" [formControlName]="qidx" class="form-control">
-            </div>
-            <small class="form-text text-muted">Ingredients and quantities</small>
-        </div>
     </div>
-    <input type="button" value="Add Ingredient" class="btn btn-secondary" (click)="addIngredientInput()">
+    <input type="button" value="Add Ingredient" class="btn btn-secondary" (click)="addIngredientInput()" style="margin-right: 5px;">
     <input type="button" value="Remove Ingredient" class="btn btn-secondary" (click)="removeIngredient()">
     <br/>
     <br/>
