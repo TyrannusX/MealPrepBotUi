@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  krogerAppId: 'mealprepbot-c9e005f1eb7a1bc7b542b1e7d9d23c066770079600231331100',
-  krogerAppSecret: 'dii29f9m4cCaRDADmnYbqUR26euoySWziuhFTnFB'
+  krogerAppId: 'NA',
+  krogerAppSecret: 'NA\'
 };
 
 /*
